@@ -3,17 +3,13 @@
 const Model = use('Model')
 
 class User extends Model {
-  static boot() {
-    super.boot();
-    this.addHook("beforeCreate", "UserHook.generateUUID");
+  static boot () {
+    super.boot()
+    this.addHook('beforeCreate', 'UserHook.generateUUID')
   }
 
-  static get primaryKey() {
-    return "uuid";
-  }
-
-  static get incrementing() {
-    return false;
+  userInfo () {
+    return this.hasOne('App/Models/UserInfo')
   }
 }
 
