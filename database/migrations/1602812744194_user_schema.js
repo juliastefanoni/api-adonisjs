@@ -3,7 +3,7 @@
 const Schema = use('Schema')
 
 class UserSchema extends Schema {
-  up () {
+  up() {
     this.create('users', (table) => {
       table.increments()
       table.uuid('uuid')
@@ -13,7 +13,7 @@ class UserSchema extends Schema {
     })
   }
 
-  down () {
+  down() {
     this.drop('users')
   }
 }

@@ -4,9 +4,10 @@
 const Schema = use('Schema')
 
 class UserInfoSchema extends Schema {
-  up () {
+  up() {
     this.create('user_infos', (table) => {
       table.increments()
+      table.string('name', 250)
       table.bigInteger('cpf').notNullable().unique()
       table.string('state', 60)
       table.date('dateBirth')
@@ -23,7 +24,7 @@ class UserInfoSchema extends Schema {
     })
   }
 
-  down () {
+  down() {
     this.drop('user_infos')
   }
 }

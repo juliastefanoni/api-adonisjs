@@ -1,3 +1,3 @@
 const Route = use('Route')
 
-Route.post('users', 'UserController.store')
+Route.resource('users', 'UserController').apiOnly()

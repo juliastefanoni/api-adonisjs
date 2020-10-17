@@ -5,7 +5,12 @@ const UserInfo = use('App/Models/UserInfo')
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 class UserController {
   async index() {
-    const users = await User.all()
+    const users = await User.query()
+      .setVisible(['uuid', 'email'])
+      .with('userInfo', (builder) => {
+        builder.setVisible(['name'])
+      })
+      .fetch()
 
     return users
   }
@@ -14,6 +19,7 @@ class UserController {
     const {
       email,
       password,
+      name,
       cpf,
       state,
       dateBirth,
@@ -32,6 +38,7 @@ class UserController {
 
     await user.userInfo().create({
       cpf,
+      name,
       state,
       dateBirth,
       telephone,
@@ -40,6 +47,7 @@ class UserController {
 
     return {
       id: user.uuid,
+      name,
       email,
       cpf
     }
