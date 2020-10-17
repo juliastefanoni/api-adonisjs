@@ -3,12 +3,13 @@
 const Model = use('Model')
 
 class User extends Model {
-  static boot () {
+  static boot() {
     super.boot()
     this.addHook('beforeCreate', 'UserHook.generateUUID')
+    this.addHook('beforeCreate', 'UserHook.encryptPassword')
   }
 
-  userInfo () {
+  userInfo() {
     return this.hasOne('App/Models/UserInfo')
   }
 }

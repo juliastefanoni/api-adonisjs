@@ -4,13 +4,13 @@ const UserInfo = use('App/Models/UserInfo')
 
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 class UserController {
-  async index () {
+  async index() {
     const users = await User.all()
 
     return users
   }
 
-  async store ({ request, response }) {
+  async store({ request, response }) {
     const {
       email,
       password,
@@ -39,7 +39,7 @@ class UserController {
     })
 
     return {
-      uuid: user.uuid,
+      id: user.uuid,
       email,
       cpf
     }
