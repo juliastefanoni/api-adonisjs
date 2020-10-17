@@ -6,10 +6,7 @@ const UserInfo = use('App/Models/UserInfo')
 class UserController {
   async index() {
     const users = await User.query()
-      .setVisible(['uuid', 'email'])
-      .with('userInfo', (builder) => {
-        builder.setVisible(['name'])
-      })
+      .setVisible(['uuid', 'email', 'name'])
       .fetch()
 
     return users
@@ -34,11 +31,10 @@ class UserController {
       return response.status(401).send('User alread exists')
     }
 
-    const user = await User.create({ email, password })
+    const user = await User.create({ email, password, name })
 
     await user.userInfo().create({
       cpf,
-      name,
       state,
       dateBirth,
       telephone,
@@ -46,10 +42,30 @@ class UserController {
     })
 
     return {
-      id: user.uuid,
+      uuid: user.uuid,
       name,
       email,
       cpf
+    }
+  }
+
+  async show({ params, response }) {
+    const userExists = await User.findBy('uuid', params.id)
+
+    if (!userExists) {
+      return response.status(401).send('User not exists')
+    }
+
+    const userInfos = await userExists
+      .userInfo()
+      .setHidden(['created_at', 'updated_at', 'user_id', 'id'])
+      .fetch()
+
+    return {
+      uuid: params.id,
+      email: userExists.email,
+      name: userExists.name,
+      userInfos
     }
   }
 }

@@ -7,7 +7,6 @@ class UserInfoSchema extends Schema {
   up() {
     this.create('user_infos', (table) => {
       table.increments()
-      table.string('name', 250)
       table.bigInteger('cpf').notNullable().unique()
       table.string('state', 60)
       table.date('dateBirth')
