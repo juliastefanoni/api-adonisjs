@@ -105,7 +105,7 @@ class UserController {
     const user = await User.findByOrFail('uuid', params.id)
     await user.delete()
 
-    return { 'User deleted': user }
+    return 'User deleted'
   }
 }
 
