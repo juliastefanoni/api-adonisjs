@@ -100,6 +100,13 @@ class UserController {
       userInfos
     }
   }
+
+  async destroy({ params }) {
+    const user = await User.findByOrFail('uuid', params.id)
+    await user.delete()
+
+    return { 'User deleted': user }
+  }
 }
 
 module.exports = UserController
