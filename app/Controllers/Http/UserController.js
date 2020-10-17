@@ -1,6 +1,5 @@
 'use strict'
 const User = use('App/Models/User')
-const UserInfo = use('App/Models/UserInfo')
 
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 class UserController {
@@ -12,7 +11,7 @@ class UserController {
     return users
   }
 
-  async store({ request, response }) {
+  async store({ request }) {
     const {
       email,
       password,
@@ -23,13 +22,6 @@ class UserController {
       telephone,
       address
     } = request.all()
-
-    const userExists = await User.findBy('email', email)
-    const cpfExists = await UserInfo.findBy('cpf', cpf)
-
-    if (userExists || cpfExists) {
-      return response.status(401).send('User alread exists')
-    }
 
     const user = await User.create({ email, password, name })
 
@@ -49,22 +41,18 @@ class UserController {
     }
   }
 
-  async show({ params, response }) {
-    const userExists = await User.findBy('uuid', params.id)
+  async show({ params }) {
+    const user = await User.findByOrFail('uuid', params.id)
 
-    if (!userExists) {
-      return response.status(401).send('User not exists')
-    }
-
-    const userInfos = await userExists
+    const userInfos = await user
       .userInfo()
       .setHidden(['created_at', 'updated_at', 'user_id', 'id'])
       .fetch()
 
     return {
       uuid: params.id,
-      email: userExists.email,
-      name: userExists.name,
+      email: user.email,
+      name: user.name,
       userInfos
     }
   }
