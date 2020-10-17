@@ -4,9 +4,9 @@
 <h1 align="center"> 
   API ADONISJS
   <p align="center">
-    <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/juliastefanoni/api-adonisjs?style=flat-square&color=8257e5">
-    <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/juliastefanoni/api-adonisjs?style=flat-square&color=8257e5">
-    <img alt="GitHub stars" src="https://img.shields.io/github/stars/juliastefanoni/juliastefanoni/api-adonisjs?style=flat-square&color=8257e5"> 
+    <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/juliastefanoni/api-adonisjs?style=flat-square&color=8257e4">
+    <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/juliastefanoni/api-adonisjs?style=flat-square&color=8257e4">
+    <img alt="GitHub stars" src="https://img.shields.io/github/stars/juliastefanoni/api-adonisjs?style=flat-square&color=8257e4"> 
   </p>
 
 </h1>
